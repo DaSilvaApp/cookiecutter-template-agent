@@ -1,0 +1,7 @@
+{
+  "project_name": "Template Agent",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "author_name": "Your Name",
+  "python_version": "3.12",
+  "description": "A short project description"
+}
