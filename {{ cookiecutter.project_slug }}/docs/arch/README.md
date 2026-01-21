@@ -37,14 +37,12 @@ It shows servers, containers, cloud services, networking, and infrastructure.
 
 ---
 
-### 4. Graph Implementation
+### 4.  Cloud Infrastructure Architecture
 
-**File:** `graph-implementation.drawio`
+**File:** `cloud.drawio`
 
 **Goal:**  
-Shows how the system is implemented using agent patterns in a graph-based workflow. 
-It can includes nodes, edges, and execution flow.  
-This diagram is framework-agnostic and can be used with LangGraph or any graph library.
+Provides a high-level view of the system's deployment within a Cloud Provider environment (GCP/Azure). It includes components, services, and infrastructure.
 
 ---
 
