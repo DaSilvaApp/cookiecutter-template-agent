@@ -15,7 +15,7 @@ This is a Python project template created using Cookiecutter.
 ## 🚀 Getting Started
 
 ### 1. Install dependencies
-- uv install
+- uv sync
 
 ### 2. Environment Variables
 - Copy .env.example and add your own values:
@@ -23,9 +23,6 @@ This is a Python project template created using Cookiecutter.
 
 ### 3. Run the app
 - uv run app
-
-### 4. Run tests
-- uv test
 
 ### 🚀 Running the project
 This project uses `uv run` to start the app.

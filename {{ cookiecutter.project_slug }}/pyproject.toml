@@ -31,6 +31,3 @@ ignore = []
 
 [tool.ruff.format]
 quote-style = "double"
-
-[tool.uv.scripts]
-test = "pytest"
