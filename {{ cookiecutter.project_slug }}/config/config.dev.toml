@@ -1,0 +1,12 @@
+[app]
+debug = true
+log_level = "DEBUG"
+
+[llm]
+model = "gpt-5-nano"
+temperature = 0.5
+
+[tools.alphavantage]
+enabled = true
+url = "https://mcp.alphavantage.co/mcp"
+apikey_env = "ALPHA_VANTAGE_API_KEY"
