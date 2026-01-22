@@ -1,23 +1,30 @@
 {
-  "name": "Python UV Container",
+  "name": "{{ cookiecutter.project_name }}",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "app",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/workspace/financial_analysis_agent",
   "shutdownAction": "stopCompose",
-  "postCreateCommand": "python -m pip install --upgrade pip && pip install uv && uv install && pre-commit install",
+  "postCreateCommand": "git config --global --add safe.directory /workspace && uv sync && uv run pre-commit install",
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
         "eamodio.gitlens",
         "ms-toolsai.jupyter"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.formatting.provider": "ruff",
-        "python.linting.enabled": true,
-        "python.linting.ruffEnabled": true
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+          }
+        },
+        "ruff.nativeServer": "on"
       }
     }
   }

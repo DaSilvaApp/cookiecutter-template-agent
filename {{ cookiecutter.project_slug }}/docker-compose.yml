@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        PYTHON_VERSION: 3.12
+    container_name: "finance-agent-app"
+    volumes:
+      - ..:/workspace:cached 
+    working_dir: /workspace/financial_analysis_agent
+    command: sleep infinity
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    tty: true

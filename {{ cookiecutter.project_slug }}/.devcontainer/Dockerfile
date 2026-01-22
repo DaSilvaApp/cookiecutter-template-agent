@@ -1,3 +1,4 @@
+ARG PYTHON_VERSION=3.12
 FROM python:${PYTHON_VERSION}-slim
 
 WORKDIR /workspace
@@ -14,4 +15,5 @@ RUN pip install --upgrade pip \
 
 COPY . .
 
-RUN uv install
+ENV UV_PROJECT_ENVIRONMENT="/usr/local"
+RUN uv sync
