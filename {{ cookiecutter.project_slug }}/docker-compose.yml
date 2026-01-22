@@ -5,10 +5,10 @@ services:
       dockerfile: .devcontainer/Dockerfile
       args:
         PYTHON_VERSION: 3.12
-    container_name: "finance-agent-app"
+    container_name: {{ cookiecutter.project_slug }}
     volumes:
       - ..:/workspace:cached 
-    working_dir: /workspace/financial_analysis_agent
+    working_dir: /workspace/{{ cookiecutter.project_slug }}
     command: sleep infinity
     ports:
       - "8000:8000"

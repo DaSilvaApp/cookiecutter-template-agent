@@ -1,9 +1,14 @@
 {
-  "name": "{{ cookiecutter.project_name }}",
+  "name": "{{ cookiecutter.project_slug }}",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "app",
-  "workspaceFolder": "/workspace/financial_analysis_agent",
+  "workspaceFolder": "/workspace/{{ cookiecutter.project_slug }}",
   "shutdownAction": "stopCompose",
+    "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+       "moby": false
+    }
+  },
   "postCreateCommand": "git config --global --add safe.directory /workspace && uv sync && uv run pre-commit install",
   "customizations": {
     "vscode": {
@@ -12,7 +17,8 @@
         "ms-python.vscode-pylance",
         "charliermarsh.ruff",
         "eamodio.gitlens",
-        "ms-toolsai.jupyter"
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker" 
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",
@@ -24,7 +30,8 @@
             "source.organizeImports.ruff": "explicit"
           }
         },
-        "ruff.nativeServer": "on"
+        "ruff.nativeServer": "on",
+        "docker.dockerPath": "/usr/bin/docker"
       }
     }
   }
