@@ -11,6 +11,15 @@ This is a Python project template created using Cookiecutter.
 
 ## 🧱 Project Structure
 
+├── config/         # Environment settings (Dev/Stg/Prod) & System Prompts
+├── data/           # Persistence layer (Raw docs & Vector Store)
+├── src/
+│   ├── api/        # Independent REST API (FastAPI) & App DB
+│   ├── core/       # Orchestration Engine & reasoning flow
+│   ├── services/   # Functional Workers (Agents, RAG, LLM, Tools)
+│   ├── schema/     # Pydantic validation models
+|   └── utils/      # Helper functions 
+└── tests/          # Unit, integration, and RAG testing
 
 ## 🚀 Getting Started
 
