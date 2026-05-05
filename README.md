@@ -54,18 +54,3 @@ cookiecutter git@github.com:your-username/cookiecutter-template-agent.git
 ├── .env                    # SECRETS & SWITCH: APP_ENV=dev/stg/prod
 ├── .gitignore              # VERSION CONTROL: Files to ignore
 └── requirements.txt        # DEPENDENCIES: Necessary Python libraries
-
-
-## 🚀 An example of a singleton pattern at the end of a script:
-
-
-_dataset_store = None
-
-
-def get_dataset_store() -> DatasetStore:
-    global _dataset_store
-
-    if _dataset_store is None:
-        _dataset_store = DatasetStore()
-
-    return _dataset_store
