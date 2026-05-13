@@ -9,11 +9,9 @@ This template helps you bootstrap a new Python project with a clean structure, D
 ## 🚀 Usage
 
 To create a new project from this template:
-
+``` bash
 cookiecutter https://github.com/your-username/cookiecutter-template-agent
 cookiecutter git@github.com:your-username/cookiecutter-template-agent.git
-
-``` bash
 
 # ⚙️ CONFIGURATION (env configs + system prompts)
 ├── config/
