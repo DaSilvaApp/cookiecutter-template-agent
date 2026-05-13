@@ -13,7 +13,7 @@ To create a new project from this template:
 cookiecutter https://github.com/your-username/cookiecutter-template-agent
 cookiecutter git@github.com:your-username/cookiecutter-template-agent.git
 
-
+``` bash
 
 # ⚙️ CONFIGURATION (env configs + system prompts)
 ├── config/
