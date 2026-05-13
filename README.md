@@ -10,47 +10,128 @@ This template helps you bootstrap a new Python project with a clean structure, D
 
 To create a new project from this template:
 
-```bash
 cookiecutter https://github.com/your-username/cookiecutter-template-agent
 cookiecutter git@github.com:your-username/cookiecutter-template-agent.git
 
 
-├── config/                 # STATIC CONFIG: Environment-specific settings
-│   ├── config.dev.toml     # LOCAL: Settings for development/testing
-│   ├── config.stg.toml     # STAGING: Mirror of production for final QA
-│   ├── config.prod.toml    # PRODUCTION: Final model and DB settings
-│   └── prompts.yaml        # SYSTEM PROMPTS: Shared instructions for the LLM/Agents
-├── data/                   # PERSISTENCE: The data layer
-│   ├── raw/                # Source documents (PDFs, Docs, etc.)
-│   ├── processed/          # Cleaned/Chunked text ready for embedding
-│   └── vector_store/       # Local vector database files (Chroma, FAISS)
-├── logs/                   # OBSERVABILITY: Application & Error tracking
-├── docs/                   # DOCUMENTATION: Project documentation
-├── notebooks/              # DEVELOPMENT: Jupyter notebooks
-├── scripts/                # MAINTENANCE: Database ingestion & migrations
-├── src/                    # SOURCE CODE: Main application logic
-│   ├── api/                # ENTRY POINT: The Independent REST API
-│   │   ├── main.py         # SERVER BOOTSTRAP: Starts FastAPI & connects Core
-│   │   ├── endpoints/      # PUBLIC ROUTES: /chat, /agent/research, /status
-│   │   ├── db/             # APP DB: Metadata storage (users, session IDs)
-│   │   └── llm/            # API LOGIC: Streaming, SSE, and CORS settings
-│   ├── core/               # THE ENGINE: Logic Orchestration (Internal)
-│   │   ├── main.py         # SYSTEM SETUP: CLI entry & internal initialization
-│   │   ├── config.py       # SETTINGS LOADER: Logic to pick dev/stg/prod toml
-│   │   ├── orchestration/  # THE BRAIN: Manages the reasoning flow
-│   │   │   ├── engine.py   # COORDINATOR: Connects Agents + Tools + RAG
-│   │   │   └── state.py    # MEMORY: Manages session history (The Journal)
-│   │   └── logger.py       # LOGGING: Global system-wide logging setup
-│   ├── services/           # THE WORKERS: Functional modules
-│   │   ├── agents/         # PERSONAS: Specialized AI logic (Researcher, Writer)
-│   │   ├── llm/            # CONNECTION: Logic to talk to AI providers (Factory)
-│   │   ├── rag/            # RETRIEVAL: Loading and vector searching
-│   │   └── tools/          # CAPABILITIES: Python tools (Web, SQL, etc.)
-│   ├── ui/                 # (OPTIONAL) TESTING CLIENT: Independent UI
-│   │   └── app.py          # A simple Streamlit/React app to test the API
-│   ├── schema/             # VALIDATION: Pydantic models for Input/Output
-│   └── utils/              # HELPERS: Reusable text & math utilities
-├── tests/                  # QA: Unit, integration, and RAG testing
-├── .env                    # SECRETS & SWITCH: APP_ENV=dev/stg/prod
-├── .gitignore              # VERSION CONTROL: Files to ignore
-└── requirements.txt        # DEPENDENCIES: Necessary Python libraries
+
+# ⚙️ CONFIGURATION (env configs + system prompts)
+├── config/
+│   ├── config.dev.toml
+│   ├── config.stg.toml
+│   ├── config.prod.toml
+│   └── prompts.yaml
+
+# 📦 LOCAL DEV ONLY (NOT production)
+# Used for offline testing, mock data, local vector DBs
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── vector_store/
+
+# 📜 LOGS (application + debugging)
+├── logs/
+
+# 📚 DOCUMENTATION
+├── docs/
+
+# 🧰 DEV / MAINTENANCE SCRIPTS
+├── scripts/
+
+
+# 🌐 API LAYER (HTTP entrypoint)
+├── api/
+│   ├── main.py
+│   ├── endpoints/
+│   ├── middleware.py              # auth hooks, rate limiting
+│   └── db.py                     # lightweight metadata access only
+
+
+# 🧠 CORE ORCHESTRATION ENGINE (stateless brain)
+├── core/
+│   ├── engine.py                 # request orchestration
+│   ├── memory.py                 # session context builder
+│   ├── prompts/
+│   ├── schemas/
+│   └── telemetry.py              # tokens, cost, tracing hooks
+
+
+# ⚙️ CAPABILITIES LAYER (LLM + RAG + tools)
+├── services/
+│   ├── agents/
+│   ├── llm/
+│   ├── rag/
+│   ├── tools/
+│   └── prompts_registry.py       # prompt versions + experiments
+
+
+# 💾 STATE LAYER (PRODUCTION MEMORY + DATA ABSTRACTION)
+├── state/
+│   ├── users/                    # identity + preferences
+│   ├── sessions/                 # conversation history
+│   ├── memory/                   # long-term + summaries
+│   ├── billing/                  # token + cost tracking
+│   │
+│   └── storage/                 # 🔌 production DB adapters
+│       ├── postgres.py          # users, sessions, billing
+│       ├── redis.py             # cache + session + queues
+│       └── vector_db.py         # embeddings + retrieval
+
+
+# 🚀 BACKGROUND JOB SYSTEM (ASYNC WORKERS)
+├── workers/
+│   ├── celery_app.py
+│   ├── tasks.py
+│   └── jobs/
+│       ├── ingestion.py         # document ingestion pipeline
+│       ├── embeddings.py        # embedding generation
+│       └── memory.py            # memory summarization
+
+
+# 🔐 AUTHENTICATION + SECURITY
+├── auth/
+│   ├── jwt.py
+│   ├── permissions.py
+│   └── rate_limits.py
+
+
+# 🧪 LLM EVALUATION SYSTEM (quality control)
+├── evals/
+│   ├── datasets/
+│   ├── runners/
+│   └── metrics/
+
+
+# 📊 OBSERVABILITY (logs, metrics, tracing)
+├── observability/
+│   ├── logging.py
+│   ├── metrics.py
+│   └── tracing.py
+
+
+# 🖥️ OPTIONAL DEV UI
+├── ui/
+
+
+# 🧪 TESTING STRATEGY
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   ├── api/
+│   ├── rag/
+│   ├── workers/
+│   └── fixtures/
+
+
+# 🐳 INFRASTRUCTURE (DEPLOYMENT)
+├── infra/
+│   ├── docker/
+│   │   ├── Dockerfile            # main API container
+│   │   └── docker-compose.yml    # full stack (api + worker + db + redis)
+│   ├── ci/                       # CI/CD pipelines
+│   └── scripts/                  # deploy helpers
+
+
+# 🔐 ENV + PROJECT CONFIG
+├── .env.example
+└── README.md
